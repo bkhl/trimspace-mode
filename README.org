@@ -1,0 +1,27 @@
+#+TITLE: Trimspace-mode
+
+~trimspace-mode~ provides a very minimal minor mode that adds a hook to run ~delete-trailing-whitespace~ before saving a file.
+
+It also has the function ~trimspace-mode-unless-trailing-whitespace~, which activates the mode only if the buffer does not already have traling whitespace or newlines.
+
+In addition, ~require-final-newline~ is enabled, since it's assumed that if you want the editor to maintain trailing whitespace, you are most likely to also want to maintain a trailing final newline in all files.
+
+* Usage
+
+It's handy to be able to automatically enable this mode for any new files opened, but only if they are already clean of trailing whitespace and newlines. This can be done like so:
+
+#+begin_example emacs-lisp
+(add-hook 'prog-mode-hook 'trimspace-mode-unless-trailing-whitespace)
+(add-hook 'text-mode-hook 'trimspace-mode-unless-trailing-whitespace)
+#+end_example
+
+Or something like this with ~use-package~:
+
+#+begin_example emacs-lisp
+(use-package trimspace-mode
+  :hook
+  (prog-mode . trimspace-mode-unless-trailing-whitespace)
+  (text-mode . trimspace-mode-unless-trailing-whitespace))
+#+end_example
+
+If you open a file with trailing whitespace and want to clean them out, you can force enabling the mode anyway with =M-x trimspace-mode=.
