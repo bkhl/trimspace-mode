@@ -3,7 +3,7 @@
 ;; Copyright 2021  Björn Lindström <bkhl@elektrubadur.se>
 
 ;; Author: Björn Lindström <bkhl@elektrubadur.se>
-;; URL: https://gitlab.com/bkhl/trimspace-mode
+;; URL: https://git.sr.ht/~bkhl/trimspace-mode
 ;; Version: 1.0
 ;; Package-Requires: ((emacs "24.3"))
 ;; Keywords: files, convenience
