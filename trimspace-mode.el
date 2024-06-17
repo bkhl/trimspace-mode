@@ -88,9 +88,12 @@ at the end of lines, and newlines at the end of the file."
       (progn
         (add-hook 'before-save-hook #'delete-trailing-whitespace 0 t)
         (unless require-final-newline
-          (setq-local require-final-newline t)))
+          (setq-local require-final-newline t))
+        (unless delete-trailing-lines
+          (setq-local delete-trailing-lines t)))
     (remove-hook 'before-save-hook #'delete-trailing-whitespace t)
-    (kill-local-variable require-final-newline)))
+    (kill-local-variable require-final-newline)
+    (kill-local-variable delete-trailing-lines)))
 
 (provide 'trimspace-mode)
 
