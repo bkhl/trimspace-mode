@@ -1,18 +1,46 @@
 ---
 image: alpine/latest
+oauth: git.sr.ht/REPOSITORIES:RW git.sr.ht/PROFILE:RO
 packages:
   - emacs-nox
+  - hut
+  - markdown
 sources:
   - https://git.sr.ht/~bkhl/trimspace-mode
 tasks:
-  - lint: >-
-      emacs --batch
-      --eval '(checkdoc-file "trimspace-mode/trimspace-mode.el")'
+  - env: >-
+      echo cd trimspace-mode >> .buildenv
+  - deps: >-
+      emacs --quick --batch
+      --load package
+      --eval "(add-to-list 'package-archives '(\"melpa\" . \"https://melpa.org/packages/\") t)"
+      --funcall package-refresh-contents
+      --eval "(package-install 'package-lint)"
+      --eval "(package-install 'el2markdown)"
+  - checkdoc: >-
+      emacs --quick --batch --eval "(checkdoc-file \"trimspace-mode.el\")";
+  - package-lint: >-
+      emacs --quick --batch
+      --funcall package-initialize
+      --directory .
+      --eval "(require 'package-lint)"
+      --funcall package-lint-batch-and-exit trimspace-mode.el
   - test: >-
-      emacs --batch
-      --directory trimspace-mode
+      emacs --quick --batch
+      --directory .
       --load trimspace-mode-test
       --funcall ert-run-tests-batch-and-exit
+  - generate-markdown: >-
+      emacs --quick --batch
+      --funcall package-initialize
+      --load el2markdown
+      --eval "(with-current-buffer (find-file \"trimspace-mode.el\") (el2markdown-write-file \"README.md\"))"
+  - generate-html: >-
+      markdown < README.md > README.html
+  - complete-unless-main: >-
+      git diff --quiet --exit-code origin/main || complete-build
+  - publish-readme:
+      hut git update --readme README.html
 triggers:
   - action: email
     condition: failure
