@@ -18,6 +18,8 @@
 
 ;;; Code:
 
+(require 'trimspace-mode)
+
 (defun trimspace-mode-test--test (input expected)
   (let ((filename (make-temp-file "trimspace-mode-test-")))
     (with-temp-buffer

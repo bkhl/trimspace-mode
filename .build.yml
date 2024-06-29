@@ -1,0 +1,19 @@
+---
+image: alpine/latest
+packages:
+  - emacs-nox
+sources:
+  - https://git.sr.ht/~bkhl/trimspace-mode
+tasks:
+  - lint: >-
+      emacs --batch
+      --eval '(checkdoc-file "trimspace-mode/trimspace-mode.el")'
+  - test: >-
+      emacs --batch
+      --directory trimspace-mode
+      --load trimspace-mode-test
+      --funcall ert-run-tests-batch-and-exit
+triggers:
+  - action: email
+    condition: failure
+    to: "Björn Lindström <bkhl@elektrubadur.se>"
