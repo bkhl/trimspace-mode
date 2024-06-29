@@ -28,7 +28,7 @@
 ;; This package provides a very minimal minor mode that adds a hook to
 ;; run `delete-trailing-whitespace' before saving a file.
 ;;
-;; It also has the function `trimspace-mode-unless-trailing-whitespace', which
+;; It also has the function `trimspace-mode-maybe', which
 ;; activates the mode only if the buffer does not already have traling
 ;; whitespace or newlines.
 ;;
@@ -57,7 +57,7 @@ Otherwise, return nil."
     (when (re-search-backward (rx not-newline eot) nil t) t))
 
 ;;;###autoload
-(defun trimspace-mode-unless-trailing-whitespace ()
+(defun trimspace-mode-maybe ()
   "Start trimming trailing whitespace on save unless there is already some.
 
 This is useful as a hook, to automatically trim whitespace on save, but skipping
