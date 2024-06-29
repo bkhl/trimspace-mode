@@ -35,7 +35,7 @@
 ;; In addition, `require-final-newline' is enabled, since it's assumed that if
 ;; you want the editor to maintain trailing whitespace, you are most likely to
 ;; also want to maintain a trailing final newline in all files.
-
+;;
 ;; This package provides a minimalistic minor mode that enables Emacs' built-in
 ;; functions to trim/fix:
 ;;
@@ -58,7 +58,7 @@
 ;; This package is intentionally minimalistic and only concerned with whitespace
 ;; trailing off lines and files, not other whitespace issues like multiple
 ;; spaces, erronous mixing of tabs and spaces, &c. For that you may be
-;; interested in the package ~whitespace-mode~, included in Emacs.
+;; interested in the package `whitespace-mode', included in Emacs.
 ;;
 ;; To enable this mode for any new files opened, but only if they are already
 ;; clean of trailing whitespace and newlines, you can use this:
@@ -74,7 +74,7 @@
 ;;   (text-mode . trimspace-mode-maybe))
 ;;
 ;; If you open a file with trailing whitespace and want to clean them out, you
-;; can enable the mode anyway with =M-x trimspace-mode=, which will then make
+;; can enable the mode anyway with `M-x trimspace-mode', which will then make
 ;; Emacs perform clean-up the next time you save the file.
 
 ;;; Code:
