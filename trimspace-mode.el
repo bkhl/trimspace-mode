@@ -70,8 +70,8 @@
 ;;
 ;; (use-package trimspace-mode
 ;;   :hook
-;;  (prog-mode . trimspace-mode-maybe)
-;;  (text-mode . trimspace-mode-maybe))
+;;   (prog-mode . trimspace-mode-maybe)
+;;   (text-mode . trimspace-mode-maybe))
 ;;
 ;; If you open a file with trailing whitespace and want to clean them out, you
 ;; can enable the mode anyway with =M-x trimspace-mode=, which will then make
