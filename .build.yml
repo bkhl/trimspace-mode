@@ -18,12 +18,12 @@ tasks:
       --eval "(package-install 'package-lint)"
       --eval "(package-install 'el2markdown)"
   - checkdoc: >-
-      emacs --quick --batch --eval "(checkdoc-file \"trimspace-mode.el\")";
+      emacs --quick --batch --eval "(checkdoc-file \"trimspace-mode.el\")"
   - package-lint: >-
       emacs --quick --batch
       --funcall package-initialize
       --directory .
-      --eval "(require 'package-lint)"
+      --load package-lint
       --funcall package-lint-batch-and-exit trimspace-mode.el
   - test: >-
       emacs --quick --batch
@@ -39,7 +39,7 @@ tasks:
       markdown < README.md > README.html
   - complete-unless-main: >-
       git diff --quiet --exit-code origin/main || complete-build
-  - publish-readme:
+  - publish-readme: >-
       hut git update --readme README.html
 triggers:
   - action: email
