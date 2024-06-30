@@ -17,8 +17,9 @@ tasks:
       --funcall package-refresh-contents
       --eval "(package-install 'package-lint)"
       --eval "(package-install 'el2markdown)"
-  - checkdoc: >-
-      emacs --quick --batch --eval "(checkdoc-file \"trimspace-mode.el\")"
+  - checkdoc: |
+      emacs --quick --batch --eval "(checkdoc-file \"trimspace-mode.el\")" 2>&1 | tee checkdoc-output.txt
+      ! test -s checkdoc-output.txt
   - package-lint: >-
       emacs --quick --batch
       --funcall package-initialize
